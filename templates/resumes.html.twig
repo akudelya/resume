@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+<h1>Resumes</h1>
+<table border=1>
+    <tr>
+        <th>Position</th>
+        <th>Resume</th>
+        <th>Created</th>
+        <th>Last modified</th>
+        <th></th>
+    <tr>
+    {% for resume in resumes %}
+    <tr>
+        <td>{{ resume.position }}</td>
+        <td>{{ resume.displayDescription|u.truncate(16, '...') }}</td>
+        <td>{{ resume.createdAt|date('Y-m-d H:i:s') }}</td>
+        <td>{{ resume.modifiedAt|date('Y-m-d H:i:s') }}</td>
+        <td>
+            <a href="{{ path('resume_edit', {'id': resume.id}) }}">Edit<a/>
+            <a href="{{ path('resume_send', {'id': resume.id}) }}">Send<a/>
+            <a href="{{ path('resume_delete', {'id': resume.id}) }}" onclick="return confirm('Are you sure you want to delete this record?')">Delete</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+<br>
+<a href="{{ path('resume_new') }}"><button>Add resume</button></a>
+{% endblock %}

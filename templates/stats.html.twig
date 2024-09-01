@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+<h1>Resume stats</h1>
+<table border=1>
+    <tr>
+        <th>Position</th>
+        <th>Rating</th>
+    <tr>
+    {% for resume in resumes %}
+    <tr>
+        <td>{{ resume.position }}</td>
+        <td>{{ resume.avg_rating }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

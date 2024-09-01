@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+<h2>Resume {{ resume.position }} is already sent to companies</h2>
+<table border=1>
+    <tr>
+        <th>Company</th>
+        <th>Sent</th>
+        <th>Rating</th>
+    <tr>
+    {% for company in sentToCompanies %}
+    <tr>
+        <td>{{ company.company.name }}</td>
+        <td>{{ company.sentAt|date('Y-m-d H:i:s') }}</td>
+        <td>{% if company.rating %}{{ company.rating }}{% else %}<a href="{{ path('resume_rate', {'id': resume.id, 'companyid': company.company.id}) }}">Rate</a>{% endif %}</td>
+    </tr>
+    {% endfor %}
+</table>
+<br>
+
+<h2>{{ form_title }}</h2>
+{{ form(form) }}
+{% endblock %}
